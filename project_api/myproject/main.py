@@ -24,6 +24,7 @@ security = HTTPBasic()
 
 origins = [
     "https://michielkuyken.github.io/fomula1_api.github.io/",
+    "file:///C:/Users/Eigenaar/Documents/2CCS/API%20development/API%20website/index.html"
 ]
 
 app.add_middleware(
