@@ -156,7 +156,7 @@ def update_driver(driver_update: schemas.DriverCreate, driver_id: int, current_u
     return updated_driver
 
 
-@app.put("/grandprix/{grandprix_id}", response_model=schemas.Driver)
+@app.put("/grandprix/{grandprix_id}", response_model=schemas.Grandprix)
 def update_grandprix(grandprix_update: schemas.GrandprixCreate, grandprix_id: int, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
     grandprix = crud.get_grandprix_by_id(db, id=grandprix_id)
     if not grandprix:
@@ -165,7 +165,7 @@ def update_grandprix(grandprix_update: schemas.GrandprixCreate, grandprix_id: in
     return updated_grandprix
 
 
-@app.put("/standings/{standings_id}", response_model=schemas.Driver)
+@app.put("/standings/{standings_id}", response_model=schemas.Standings)
 def update_standings(standings_update: schemas.StandingsCreate, standings_id: int, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
     standings = crud.get_standings_by_id(db, id=standings_id)
     if not standings:
