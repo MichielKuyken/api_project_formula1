@@ -157,7 +157,7 @@ def update_driver(driver_update: schemas.DriverCreate, driver_id: int, current_u
 
 
 @app.put("/grandprix/{grandprix_id}", response_model=schemas.Driver)
-def update_driver(grandprix_update: schemas.GrandprixCreate, grandprix_id: int, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
+def update_grandprix(grandprix_update: schemas.GrandprixCreate, grandprix_id: int, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
     grandprix = crud.get_grandprix_by_id(db, id=grandprix_id)
     if not grandprix:
         raise HTTPException(status_code=404, detail="Grandprix not found")
@@ -166,7 +166,7 @@ def update_driver(grandprix_update: schemas.GrandprixCreate, grandprix_id: int, 
 
 
 @app.put("/standings/{standings_id}", response_model=schemas.Driver)
-def update_driver(standings_update: schemas.StandingsCreate, standings_id: int, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
+def update_standings(standings_update: schemas.StandingsCreate, standings_id: int, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
     standings = crud.get_standings_by_id(db, id=standings_id)
     if not standings:
         raise HTTPException(status_code=404, detail="Standings not found")
