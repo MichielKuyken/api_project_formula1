@@ -164,7 +164,7 @@ def delete_team(standings_achternaam: str, current_username: str = Depends(get_c
     return crud.delete_standings(db=db, standings=standings)
 
 
-@app.delete("/admin/", response_model=schemas.Admin)
+@app.delete("/admin/{admin_username}", response_model=schemas.Admin)
 def delete_team(admin_username: str, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
     admin = crud.get_admin_by_username(db, username=admin_username)
     if not admin:
