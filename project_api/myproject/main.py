@@ -132,7 +132,7 @@ def read_standings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
     return standings
 
 
-@app.get("/standings/{standings_achternaam}", response_model=schemas.Grandprix)
+@app.get("/standings/{standings_achternaam}", response_model=schemas.Standings)
 def read_standings(standings_achternaam: str, db: Session = Depends(get_db)):
     standings = crud.get_standings_by_lastname(db, achternaam=standings_achternaam)
     if standings is None:
