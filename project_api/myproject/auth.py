@@ -1,7 +1,7 @@
 from passlib.context import CryptContext
 
 
-pwd_context = CryptContext(schemes=["argon2", "bcrypt"], deprecated=False)
+pwd_context = CryptContext(schemes=["argon2", "bcrypt"], deprecated="false")
 
 
 def get_password_hash(password):
