@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 
 import models
 import schemas
+import auth
 
 
 def get_driver(db: Session, driver_achternaam: str):
@@ -126,9 +127,16 @@ def get_admin_by_username(db: Session, username: str):
     return db.query(models.Admin).filter(models.Admin.username == username).first()
 
 
+def delete_admin(db: Session, admin: schemas.Admin):
+    db.delete(admin)
+    db.commit()
+    return admin
+
+
 def create_admin(db: Session, admin: schemas.AdminCreate):
     if len(db.query(models.Admin).all()) == 0:
-        db_admin = models.Admin(username=admin.username, password=admin.password)
+        hashed_password = auth.get_password_hash(admin.password)
+        db_admin = models.Admin(username=admin.username, password=hashed_password)
         db.add(db_admin)
         db.commit()
         db.refresh(db_admin)
