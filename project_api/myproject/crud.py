@@ -66,6 +66,12 @@ def create_grandprix(db: Session, grandprix: schemas.GrandprixCreate):
     return db_grandprix
 
 
+def delete_grandprix(db: Session, grandprix: schemas.Grandprix):
+    db.delete(grandprix)
+    db.commit()
+    return grandprix
+
+
 def update_grandprix(db: Session, existing_grandprix: models.Grandprix, grandprix_update: schemas.GrandprixCreate):
     for key, value in grandprix_update.dict().items():
         setattr(existing_grandprix, key, value)
@@ -96,6 +102,12 @@ def create_standings(db: Session, standings: schemas.StandingsCreate):
     db.commit()
     db.refresh(db_standings)
     return db_standings
+
+
+def delete_standings(db: Session, standings: schemas.Standings):
+    db.delete(standings)
+    db.commit()
+    return standings
 
 
 def update_standings(db: Session, existing_standings: models.Standings, standings_update: schemas.StandingsCreate):

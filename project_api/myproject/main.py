@@ -134,7 +134,7 @@ def read_standings(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
 
 @app.get("/grandprix/{standings_achternaam}", response_model=schemas.Grandprix)
 def read_standings(standings_achternaam: str, db: Session = Depends(get_db)):
-    standings = crud.get_standings(db, standings_achternaam=standings_achternaam)
+    standings = crud.get_standings_by_lastname(db, achternaam=standings_achternaam)
     if standings is None:
         raise HTTPException(status_code=404, detail="Standings not found")
     return standings
@@ -146,6 +146,22 @@ def delete_team(driver_achternaam: str, current_username: str = Depends(get_curr
     if not drivers:
         raise HTTPException(status_code=404, detail="Driver not found")
     return crud.delete_driver(db=db, driver=drivers)
+
+
+@app.delete("/grandprix/{grandprix_circuitnaam}", response_model=schemas.Grandprix)
+def delete_team(grandprix_circuitnaam: str, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
+    grandprix = crud.get_grandprix_by_circuitname(db, circuitnaam=grandprix_circuitnaam)
+    if not grandprix:
+        raise HTTPException(status_code=404, detail="Grandprix not found")
+    return crud.delete_grandprix(db=db, grandprix=grandprix)
+
+
+@app.delete("/standings/{standings_achternaam}", response_model=schemas.Standings)
+def delete_team(standings_achternaam: str, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
+    standings = crud.get_standings_by_lastname(db, achternaam=standings_achternaam)
+    if not standings:
+        raise HTTPException(status_code=404, detail="Driver not found")
+    return crud.delete_standings(db=db, standings=standings)
 
 
 @app.put("/drivers/{driver_id}", response_model=schemas.Driver)
