@@ -165,7 +165,7 @@ def delete_team(standings_achternaam: str, current_username: str = Depends(get_c
 
 
 @app.delete("/admin/{admin_username}", response_model=schemas.Admin)
-def delete_team(admin_username: str, db: Session = Depends(get_db)):
+def delete_team(admin_username: str, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
     admin = crud.get_admin_by_username(db, username=admin_username)
     if not admin:
         raise HTTPException(status_code=404, detail="Admin not found")
