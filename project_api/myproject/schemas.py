@@ -24,8 +24,8 @@ class Driver(DriverBase):
 class GrandprixBase(BaseModel):
     circuitnaam: str
     land: str
-    winnaar: str
-    driver_id: int
+    winnaar: str | None = None
+    driver_id: int | None = None
 
 
 class GrandprixCreate(GrandprixBase):
