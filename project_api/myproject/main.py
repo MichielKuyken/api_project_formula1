@@ -74,6 +74,14 @@ def create_admin(admin: schemas.AdminCreate, db: Session = Depends(get_db)):
     return crud.create_admin(db=db, admin=admin)
 
 
+@app.delete("/admin/{admin_username}", response_model=schemas.Admin)
+def delete_team(admin_username: str, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
+    admin = crud.get_admin_by_username(db, username=admin_username)
+    if not admin:
+        raise HTTPException(status_code=404, detail="Admin not found")
+    return crud.delete_admin(db=db, admin=admin)
+
+
 @app.post("/drivers/", response_model=schemas.Driver)
 def create_driver(driver: schemas.DriverCreate, db: Session = Depends(get_db)):
     driver_achternaam = crud.get_driver_by_last_name(db, achternaam=driver.achternaam)
@@ -96,6 +104,15 @@ def read_driver(driver_achternaam: str, db: Session = Depends(get_db)):
     return driver
 
 
+@app.put("/drivers/{driver_id}", response_model=schemas.Driver)
+def update_driver(driver_update: schemas.DriverCreate, driver_id: int, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
+    driver = crud.get_driver_by_id(db, id=driver_id)
+    if not driver:
+        raise HTTPException(status_code=404, detail="Driver not found")
+    updated_driver = crud.update_driver(db, driver, driver_update)
+    return updated_driver
+
+
 @app.post("/grandprix/", response_model=schemas.Grandprix)
 def create_grandprix(grandprix: schemas.GrandprixCreate, db: Session = Depends(get_db)):
     grandprix_circuitname = crud.get_grandprix_by_circuitname(db, circuitnaam=grandprix.circuitnaam)
@@ -116,6 +133,15 @@ def read_grandprix(grandprix_circuitnaam: str, db: Session = Depends(get_db)):
     if grandprix_circuitnaam is None:
         raise HTTPException(status_code=404, detail="Grandprix not found")
     return grandprix
+
+
+@app.put("/grandprix/{grandprix_id}", response_model=schemas.Grandprix)
+def update_grandprix(grandprix_update: schemas.GrandprixCreate, grandprix_id: int, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
+    grandprix = crud.get_grandprix_by_id(db, id=grandprix_id)
+    if not grandprix:
+        raise HTTPException(status_code=404, detail="Grandprix not found")
+    updated_grandprix = crud.update_grandprix(db, grandprix, grandprix_update)
+    return updated_grandprix
 
 
 @app.post("/standings/", response_model=schemas.Standings)
@@ -162,32 +188,6 @@ def delete_team(standings_achternaam: str, current_username: str = Depends(get_c
     if not standings:
         raise HTTPException(status_code=404, detail="Driver not found")
     return crud.delete_standings(db=db, standings=standings)
-
-
-@app.delete("/admin/{admin_username}", response_model=schemas.Admin)
-def delete_team(admin_username: str, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
-    admin = crud.get_admin_by_username(db, username=admin_username)
-    if not admin:
-        raise HTTPException(status_code=404, detail="Admin not found")
-    return crud.delete_admin(db=db, admin=admin)
-
-
-@app.put("/drivers/{driver_id}", response_model=schemas.Driver)
-def update_driver(driver_update: schemas.DriverCreate, driver_id: int, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
-    driver = crud.get_driver_by_id(db, id=driver_id)
-    if not driver:
-        raise HTTPException(status_code=404, detail="Driver not found")
-    updated_driver = crud.update_driver(db, driver, driver_update)
-    return updated_driver
-
-
-@app.put("/grandprix/{grandprix_id}", response_model=schemas.Grandprix)
-def update_grandprix(grandprix_update: schemas.GrandprixCreate, grandprix_id: int, current_username: str = Depends(get_current_username), db: Session = Depends(get_db)):
-    grandprix = crud.get_grandprix_by_id(db, id=grandprix_id)
-    if not grandprix:
-        raise HTTPException(status_code=404, detail="Grandprix not found")
-    updated_grandprix = crud.update_grandprix(db, grandprix, grandprix_update)
-    return updated_grandprix
 
 
 @app.put("/standings/{standings_id}", response_model=schemas.Standings)
