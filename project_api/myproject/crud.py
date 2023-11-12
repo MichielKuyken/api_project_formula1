@@ -2,7 +2,6 @@ from sqlalchemy.orm import Session
 
 import models
 import schemas
-import auth
 
 
 def get_driver(db: Session, driver_achternaam: str):
@@ -135,8 +134,7 @@ def delete_admin(db: Session, admin: schemas.Admin):
 
 def create_admin(db: Session, admin: schemas.AdminCreate):
     if len(db.query(models.Admin).all()) == 0:
-        hashed_password = auth.get_password_hash(admin.password)
-        db_admin = models.Admin(username=admin.username, password=hashed_password)
+        db_admin = models.Admin(username=admin.username, password=admin.password)
         db.add(db_admin)
         db.commit()
         db.refresh(db_admin)
