@@ -1,12 +1,14 @@
 # api_project_formula1
 
 ## Thema
-Ik heb dit thema gekozen omdat ik een grote fan ben van de Fomrule 1. Ik ken er heel veel van en vond dit daarom ook een leuk onderwerp om een API over te maken. Het leek me interessant en leerrijk om zelf een database te maken waaruit mensen dan informatie uit konden halen zoals de coureurs, de grandprix en de standings. 
+Ik heb dit thema gekozen omdat ik een grote fan ben van de Fomrule 1. Ik ken er heel veel van en vond dit daarom ook een leuk onderwerp om een API over te maken. Het leek me interessant en leerrijk om zelf een database te maken waaruit mensen dan informatie kunnen halen zoals de coureurs, de grandprix en de standings. 
 
 ## API
-Mijn API is gemaakt zodat iedereen gegevens kan toevoegen en opvragen. Ik heb daarom voor elke tabel een get en post request gemaakt zodat het mogelijk is om coureurs, grandprix en standings toe te voegen en bekijken. Voor de reeds toegevoegde coureurs aan te passen of verwijderen hebben ze admin privileges nodig. Er is echter slechts 1 persoon die een admin kan zijn. Als er al een admin-account is aangemaakt en iemand wil een nieuw toevoegen is dit niet meer mogelijk. Het verwijderen van het admin-account is ook enkel mogelijk door de admin zelf. Hiervoor heb ik gebruik gemaakt van Basic Aut. Voor het aanpassen van de gegevens heb ik gebruik gemaakt van een put-request.
-Ik heb ook een front-end gemaakt waarop je alle drivers, grandprix en standings kunt zien. Dit geeft een gestructureerder beeld van de API en het bevat enkel de nodige informatie. De front-end heb ik op een andere GitHub staan en wordt gehost via GitHub pages. De link naar deze GitHub vindt u hieronder.
+Mijn API is zo gemaakt dat iedereen gegevens kan toevoegen en opvragen. Ik heb daarom voor elke tabel een get- en post-request gemaakt zodat het mogelijk is om coureurs, grandprix en standings toe te voegen en bekijken. Om de reeds toegevoegde coureurs aan te passen of te verwijderen hebben ze adminprivileges nodig. Er is slechts 1 persoon die een admin kan zijn. Als er al een admin-account is aangemaakt en iemand wil een nieuw account toevoegen, is dit niet meer mogelijk. Het verwijderen van het admin-account is ook enkel mogelijk door de admin zelf. Hiervoor heb ik gebruikgemaakt van Basic Auth. Voor het aanpassen van de gegevens heb ik gebruikgemaakt van een put-request.
+Ik heb ook een front-end gemaakt waarop je alle coureurs, grandprix en standings kunt zien. Dit geeft een gestructureerder beeld van de API en het bevat enkel de nodige informatie. De front-end heb ik op een andere GitHub staan en wordt gehost via GitHub Pages. De link naar deze GitHub vindt u hieronder.
+
 [GitHub front-end](https://github.com/MichielKuyken/fomula1_api.github.io)
+
 ### [Link API](https://useritem-api-service-michielkuyken.cloud.okteto.net/)
 
 ## Postman requests screenshots
